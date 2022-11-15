@@ -18,7 +18,8 @@ public final class ConnectionManager {
             try {
                 loadDriver();
                 CONNECTION_INSTANCE = DriverManager.getConnection(URL, "root", "");
-                CONNECTION_INSTANCE.setAutoCommit(false);
+                //todo: demander comment ça marche
+                //CONNECTION_INSTANCE.setAutoCommit(false);
             } catch(SQLException e) {
                 System.err.println("Connexion impossible");
             }

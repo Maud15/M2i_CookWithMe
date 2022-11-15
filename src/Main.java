@@ -12,14 +12,18 @@ public class Main {
 
         try(Connection connection = ConnectionManager.getConnectionInstance()) {
             //Action = 3 -> 6
-            int action = askAction(true);
-            RecipeManagement recipeManagement = new RecipeManagement(connection);
-            switch (action) {
-                case 3 -> recipeManagement.displayAllRecipes();
-                case 4 -> recipeManagement.addNewRecipe();
-                case 5 -> recipeManagement.displayRandomRecipe();
-                case 6 -> recipeManagement.displayRecipesByCriterion();
-            }
+            boolean isContinue = true;
+            do {
+                int action = askAction(true);
+                RecipeManagement recipeManagement = new RecipeManagement(connection, 1);
+                switch (action) {
+                    case 3 -> recipeManagement.displayAllRecipes();
+                    case 4 -> recipeManagement.addNewRecipe();
+                    case 5 -> recipeManagement.displayRecipesByCriterion();
+                    case 6 -> recipeManagement.displayRandomRecipe();
+                    case 0,9 -> isContinue = false;
+                }
+            } while (isContinue);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
@@ -45,27 +49,31 @@ public class Main {
     private static int askAction(boolean isConnected) {
         Scanner sc = new Scanner(System.in);
         String question;
-        Integer optionMax;
-        Integer optionMin;
+        int optionMax;
+        int optionMin;
         if(!isConnected) {
             question = """
+                    \n-----Menu-----
+                    - 0 : Quitter
                     - 1 : S'inscrire
                     - 2 : Se connecter
                     - 3 : Visualiser des recettes
                     """;
-            optionMin = 1;
+            optionMin = 0;
             optionMax = 3;
         } else {
             question = """
+                    \n-----Menu-----
                     - 3 : Visualiser des recettes
                     - 4 : Ajouter une recette
                     - 5 : Rechercher une recette par critère
                     - 6 : Récupérer une recette aléatoire
                     - 7 : Editer son profil
                     - 8 : Se déconnecter
+                    - 9 : Quitter
                     """;
             optionMin = 3;
-            optionMax = 6;
+            optionMax = 9;
         }
         return askDataInt(sc, question, optionMin, optionMax);
     };

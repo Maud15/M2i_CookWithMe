@@ -5,6 +5,8 @@ public interface RecipeCrudDao<E> {
 
     List<E> findAll();
 
+    E findRandom();
+
     Optional<E> findByKeyword(String criterion, String keyword);
 
     E create(E element);
