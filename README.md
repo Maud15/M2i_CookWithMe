@@ -8,11 +8,13 @@ Réaliser une application Java SE de cuisine
 Notre client nous a contacté pour réaliser une application console familiale de recette de cuisine.
 
 Fonctionnalités :
--> Utilisateur non connecté
+- > Utilisateur non connecté
     - Visualiser les recettes
     - S'inscrire (nom, prénom, email, photo, mot de passe)
     - Se connecter (email, mot de passe)
--> Utilisateur connecté
+
+.
+- > Utilisateur connecté
     - Editer son profil (nom, prénon, mot de passe)
     - Se déconnecter
     - Visualiser les recettes
